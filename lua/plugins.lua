@@ -87,6 +87,8 @@ require("lazy").setup({
             vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { noremap=true })
             vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { noremap=true })
             vim.keymap.set('n', 'su', vim.lsp.buf.references, { noremap=true })
+
+            vim.lsp.enable('kotlin_lsp')
         end
     },
     {
