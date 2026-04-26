@@ -183,4 +183,15 @@ require("lazy").setup({
             require("aichat").setup()
         end
     },
+    {
+        'jira',
+        dir = '~/projects/neovim-plugins/jiraplugin',
+        dev = true,
+        config = function()
+            require("jiraplugin").setup({
+                jira_config_file = '/Users/mlackman/projects/neovim-plugins/.jira.toml'
+            })
+        end
+    },
+
 })
