@@ -22,8 +22,28 @@ vim.opt.termguicolors = true
 
 vim.keymap.set("i","jk","<esc>",{noremap=true})
 vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, { noremap = true, silent = true, desc = 'Open diagnostic float' })
+vim.keymap.set("n", "cp", function()
+  local filepath = vim.fn.expand("%")
 
+  if filepath == "" then
+    vim.notify("Current buffer has no file path", vim.log.levels.WARN)
+    return
+  end
+
+  -- Make it behave like yanked text
+  vim.fn.setreg('"', filepath, "c") -- unnamed register
+  vim.fn.setreg("0", filepath, "c") -- yank register
+
+  -- also copy to system clipboard
+  vim.fn.setreg("+", filepath, "c")
+
+  vim.notify("Yanked file path: " .. filepath)
+end, {
+  desc = "Yank current buffer file path",
+  silent = true,
+})
 vim.lsp.enable('pyright')
+
 -- vim.lsp.enable('kotlin_lsp')
 -- vim.lsp.config('kotlin_lsp', {
 --     single_file_support = false,
